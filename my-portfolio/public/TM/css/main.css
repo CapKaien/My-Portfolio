@@ -1,0 +1,193 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: rgb(31, 37, 43);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  height: 100vh;
+  padding: 1vw;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  min-height: 100vh;
+  background: rgb(76, 98, 119); /* Default background for first child */
+  color: white;
+
+      .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns layout */
+        align-items: center;
+        gap: 2rem; /* Space between text and image */
+        width: 100%;
+        max-width: 1200px; /* Maximum width of the content area */
+      }
+      
+      .text {
+        text-align: left; /* Align text to the left */
+      }
+      
+
+      
+
+      
+      .image img {
+        width: 100%; /* Make sure the image scales with its container */
+        height: auto; /* Maintain aspect ratio */
+        max-width: 100%; /* Ensure the image does not exceed container width */
+        border-radius: 8px; /* Optional rounded corners */
+      }
+  
+      p {
+        font-size: 1vw;
+        text-align: left;
+      }
+      
+      .subheader {
+        font-size: 1.5vw;
+      }
+      
+      &:first-child {
+        background: rgb(76, 98, 119);
+        color: white;
+      }
+      
+      &:last-child {
+        background: rgb(31, 37, 43);
+        color: white;
+      }
+      
+      .hidden {
+        opacity: 0;
+        filter: blur(3px);
+        transform: translateX(-100px);
+        transition: all 1s;
+      }
+      
+      .show {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
+      }
+
+      .btn{
+        margin-top: 4vw;
+        border-radius: 50px; /* Adjust this value to make the button oval */
+        padding: 10px 20px;   /* Adjust padding to suit the oval shape */
+        width: 9vw;
+      }
+}
+
+
+
+
+#webcam-container {
+  width: 50vw;
+  /* Adjust width as needed */
+  height: 50vh;
+  /* Adjust height to be 80% of viewport height */
+
+  margin-top: 3vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  /* Optional rounded corners */
+  overflow: hidden;
+  /* Ensure content doesn't overflow */
+}
+
+.image img {
+  width: 100%;
+  /* Make sure the image scales with its container */
+  height: auto;
+  /* Maintain aspect ratio */
+  max-width: 100%;
+  /* Ensure the image does not exceed container width */
+  border-radius: 8px;
+  /* Optional rounded corners */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  section {
+    padding: 4vw;
+    /* Adjusted padding for smaller screens */
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+    /* Ensure text takes full width when image is hidden */
+    text-align: center;
+  }
+
+  .text h1 {
+    font-size: 4rem;
+    /* Adjusted font size for smaller screens */
+  }
+
+  .text .subheader {
+    font-size: 1.5rem;
+    /* Adjusted font size for smaller screens */
+  }
+
+  .text p {
+    font-size: 1rem;
+    /* Adjusted font size for smaller screens */
+  }
+
+  /* Hide image on smaller screens */
+  .image {
+    display: none;
+  }
+  .btn {
+    margin-top: 5vw;
+    width: 20vw; /* Adjust button width for tablets */
+    background: none;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 6vw;
+    /* Further adjusted padding for smaller screens */
+  }
+
+  .text h1 {
+    font-size: 5rem;
+    /* Further adjusted font size for very small screens */
+  }
+
+  .text p {
+    font-size: 2.5rem;
+    /* Further adjusted font size for very small screens */
+  }
+
+  /* Ensure the image remains hidden on very small screens */
+  .image {
+    display: none;
+  }
+
+  .btn {
+    margin-top: 5vw;
+    width: 100vw; /* Adjust button width for very small screens */
+    background: none;
+  }
+}
+
+.btn {
+  background: rgb(31, 37, 43);
+  border: none; /* Remove border */
+  color: white; /* Text color */
+}
+
+

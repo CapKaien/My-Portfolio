@@ -59,11 +59,8 @@ export default function Works({ showAll = false }) {
                 </h2>
             </div>
 
-            {visibleWorks.map((work, idx) => (
-                <div
-                    key={work.title}
-                    className="w-full max-w-6xl mb-8 relative"
-                >
+            {visibleWorks.map((work, idx) => {
+                const CardContent = (
                     <motion.div
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -126,56 +123,23 @@ export default function Works({ showAll = false }) {
                             </div>
                         </div>
                     </motion.div>
+                );
 
-                    {/* Popover */}
-                    <AnimatePresence>
-                        {showPopoverIdx === idx && (
-                            <motion.div
-                                key="popover"
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ type: "spring", duration: 0.3 }}
-                                style={{
-                                    position: "fixed",
-                                    top: popoverPos.y + 16,
-                                    left: popoverPos.x + 16,
-                                    zIndex: 9999,
-                                    width: "24rem",
-                                    maxWidth: "90vw",
-                                    borderRadius: "0.75rem",
-                                    padding: "1rem",
-                                    background: "#181818",
-                                    border: "1px solid #2c2b2b",
-                                    boxShadow: "0 8px 32px 0 rgba(0,0,0,0.25)",
-                                    pointerEvents: "none",
-                                }}
-                            >
-                                <div className="font-semibold text-white text-base mb-1">
-                                    {work.title}
-                                </div>
-                                <div className="text-xs text-neutral-400 mb-2">
-                                    {work.subtitle} &middot; {work.year}
-                                </div>
-                                <div className="mb-2">
-                                    <span className="font-semibold text-[#c7c7c7]">Tech: </span>
-                                    {work.tech.map((t) => (
-                                        <span
-                                            key={t}
-                                            className="inline-block bg-[#101010] border border-[#232323] rounded px-2 py-1 text-xs text-[#2FCA55] font-semibold mr-2 mb-1"
-                                        >
-                                            {t}
-                                        </span>
-                                    ))}
-                                </div>
-                                <div className="text-xs text-neutral-300">
-                                    {work.detail}
-                                </div>
-                            </motion.div>
+                return (
+                    <div
+                        key={work.title}
+                        className="w-full max-w-6xl mb-8 relative"
+                    >
+                        {work.link ? (
+                            <a href={work.link} target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>
+                                {CardContent}
+                            </a>
+                        ) : (
+                            CardContent
                         )}
-                    </AnimatePresence>
-                </div>
-            ))}
+                    </div>
+                );
+            })}
 
             {!showAll && (
                 <div className="w-full max-w-6xl flex justify-end">

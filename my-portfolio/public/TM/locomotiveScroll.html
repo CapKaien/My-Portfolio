@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smooth Scrolling with Locomotive Scroll</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: rgb(31, 37, 43);
+  }
+  .section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #fff;
+  }
+  .section:nth-child(even) {
+    background: rgb(31, 37, 43);
+  }
+  .section:nth-child(odd) {
+    background: rgb(86, 127, 168);
+  }
+</style>
+</head>
+<body data-scroll-container>
+  <div class="section" data-scroll data-scroll-speed="2">
+    Section 1
+  </div>
+  <div class="section" data-scroll data-scroll-speed="-1">
+    Section 2
+  </div>
+
+  <!-- Include Locomotive Scroll library -->
+  <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
+  <script>
+    // Initialize Locomotive Scroll
+    const scroll = new LocomotiveScroll({
+  el: document.querySelector('[data-scroll-container]'),
+  smooth: true,
+  direction: 'vertical',
+  snap: false
+});
+  </script>
+</body>
+</html>

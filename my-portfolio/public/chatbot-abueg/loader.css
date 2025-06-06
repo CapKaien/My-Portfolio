@@ -1,0 +1,35 @@
+.loader {
+    display: block;
+    width: 84px;
+    height: 84px;
+    position: fixed; /* Change to fixed for full screen */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center it */
+}
+
+.loader:before, .loader:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #FFF;
+    transform: translate(-50%, -100%) scale(0);
+    animation: push_401 1s infinite linear; /* Reduced duration to 1s */
+}
+
+.loader:after {
+    animation-delay: 0.5s; /* Adjusted delay to match new duration */
+}
+
+@keyframes push_401 {
+    0%, 50% {
+        transform: translate(-50%, 0%) scale(1);
+    }
+    100% {
+        transform: translate(-50%, -100%) scale(0);
+    }
+}

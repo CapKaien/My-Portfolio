@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <title>Leo Chatbot ni Abueg</title>
+    <link rel="icon" href="leo.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loader.css">
+    <link rel="stylesheet" href="loading.css">
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const helloMessage = document.getElementById("hello-message");
+            const messageText = "Hello Hooman"; // Text for the hello-message
+            let index = 0;
+            let isTyping = true; // Track if we are typing or backspacing
+
+            // Function to show the typewriting effect and backspacing effect
+            function typeWriter() {
+                if (isTyping) {
+                    if (index <= messageText.length) {
+                        helloMessage.innerHTML = messageText.slice(0, index); // Update text up to current index
+                        index++;
+                        setTimeout(typeWriter, 150); // Adjust the typing speed (in milliseconds)
+                    } else {
+                        // Wait for 3 seconds after typing effect is complete
+                        setTimeout(() => {
+                            isTyping = false; // Start backspacing
+                            typeWriter();
+                        }, 2000);
+                    }
+                } else {
+                    if (index > 0) {
+                        helloMessage.innerHTML = messageText.slice(0, index - 1); // Remove one character at a time
+                        index--;
+                        setTimeout(typeWriter, 100); // Adjust the backspacing speed
+                    } else {
+                        // Wait for 3 seconds after backspacing effect is complete
+                        setTimeout(() => {
+                            isTyping = true; // Start typing again
+                            typeWriter();
+                        }, 3000);
+                    }
+                }
+            }
+
+            // Function to toggle gradients
+            function toggleGradient() {
+                helloMessage.classList.toggle("linear-gradient");
+
+            }
+
+            // Initially set the radial gradient class
+            helloMessage.classList.add("radial-gradient");
+
+            // Start gradient toggling every 5 seconds
+            setInterval(toggleGradient, 5000);
+
+            // Start the typewriter effect after page load
+            typeWriter();
+
+            // Reference to the chat container
+            const chatContainer = document.querySelector('.chat-container');
+
+            // Add event listener to textarea for input
+            const chatInput = document.getElementById('chat-input');
+            chatInput.addEventListener('input', function () {
+                // Show chat container when there is input
+                if (chatInput.value.trim() !== "") {
+                    chatContainer.style.display = 'block';
+                } else {
+                    chatContainer.style.display = 'none'; // Optionally hide again if input is empty
+                }
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const helloMessage = document.getElementById("hello-message");
+            const message = document.getElementById("message");
+
+            // Delay the animations slightly to make them appear one after the other
+            setTimeout(() => {
+                helloMessage.classList.add('slide-in');
+            }, 500); // Delay for hello-message
+
+            setTimeout(() => {
+                message.classList.add('slide-in');
+            }, 1500); // Delay for message
+        });
+
+    </script>
+
+    <style>
+        .card-text {
+    display: flex;                /* Use flexbox for centering */
+    align-items: center;         /* Center vertically */
+    justify-content: center;     /* Center horizontally */
+    height: 100%;                /* Take full height of the card */
+    text-align: center;          /* Center text alignment */
+    color: white;                /* Change text color as needed */
+    font-size: 0.8em;            /* Adjust font size as needed */
+}
+
+        .recommendation-container {
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .recommendation-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .recommendation-container {
+            margin-top: 2rem;
+        }
+
+        .recommendation-card {
+            cursor: pointer;
+            background-color: rgba(34, 34, 34, 0.6); /* Semi-transparent background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        
+            /* Set dimensions using viewport units */
+            width: 15vw; /* Adjust as necessary */
+            height: 25vh; /* Adjust as necessary */
+        
+            /* Center the content */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center; /* Center the text inside the card */
+        
+            /* Glassmorphism effect */
+            backdrop-filter: blur(10px); /* Adjust the blur strength as necessary */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Optional: border for more contrast */
+        }
+
+.recommendation-card:hover {
+    transform: translateY(-10px); /* Slight lift on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Increase shadow on hover */
+}
+
+
+        .recommendation-card .card-body {
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        span {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #send-btn {
+            color: aliceblue;
+        }
+
+        /* span:hover {
+            background-color: white;
+            transform: scale(1.05);
+        }
+
+        span svg {
+            width: 1.5vw;
+            height: 1.5vw;
+            fill: currentColor;
+            color: white;
+            transition: transform 0.2s ease;
+        } */
+
+        span:hover svg {
+            transform: scale(1.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .chat-container {
+            border-radius: 1.5vw;
+            padding: 2vw;
+            max-width: 70vw;
+            margin: 0 auto;
+            overflow-y: scroll;
+            display: none;
+            /* Hide by default */
+        }
+
+        /* Hide scrollbar for Chrome, Safari, and Opera */
+        .chat-container::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        /* Hide scrollbar for Firefox */
+        .chat-container {
+            scrollbar-width: none;
+        }
+
+        #hello-message {
+            font-size: 5.5em;
+            opacity: 0.8;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: radial-gradient(circle 918px at 13.1% 25.5%, rgba(249, 107, 107, 1) 0%, rgba(247, 231, 172, 1) 48.9%, rgba(173, 247, 172, 1) 90%);
+            border-radius: 10px;
+            text-align: left;
+            margin-left: 20px;
+            display: flex;
+            font-weight: bold;
+            transition: background-image 1s ease;
+            overflow: hidden;
+            height: 1.2em;
+            line-height: 1.2em;
+        }
+
+
+        /* Original radial gradient */
+        .radial-gradient {
+            background-image: radial-gradient(circle 918px at 13.1% 25.5%, rgba(249, 107, 107, 1) 0%, rgba(247, 231, 172, 1) 48.9%, rgba(173, 247, 172, 1) 90%);
+        }
+
+
+        #message {
+            font-size: 1.5em;
+            opacity: 0.8;
+            color: #e0e0e0;
+            border-radius: 10px;
+            text-align: left;
+            margin-left: 10px;
+            display: flex;
+            padding-top: 10vh;
+
+        }
+
+        .gemini-icon {
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .powered-by {
+            font-size: 1em;
+            text-align: left;
+            color: #e0e0e0;
+        }
+
+        /* Keyframes for left-to-right effect */
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-100%);
+                /* Start off the screen */
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
+                /* Slide to its original position */
+                opacity: 1;
+            }
+        }
+
+        /* Apply the animation to hello-message and message */
+        #hello-message,
+        #message {
+            opacity: 0;
+            /* Start hidden */
+            transform: translateX(-100%);
+            /* Start off the screen */
+            transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+            /* Reduced time for faster transition */
+        }
+
+        /* Animation class for when the elements become visible */
+        .slide-in {
+            animation: slideIn 0.7s ease-out forwards;
+            /* Faster animation duration */
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <body>
+        <!-- Video background -->
+        <video autoplay muted loop class="background-video">
+            <source src="grad1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Other content of your page -->
+    </body>
+
+
+    <div class="container">
+        <div id="hello-message" class="text-center text-white mt-5 mb-3"></div>
+        <div id="message" class="text-center text-white mb-3">Your Personal AI companion</div>
+        <div class="text-center text-white mb-3">
+            <div class="d-flex align-items-center">
+                <!-- <div class="gemini-icon me-2">
+                    <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z"
+                            fill="url(#prefix__paint0_radial_980_20147)" />
+                        <defs>
+                            <radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1"
+                                gradientUnits="userSpaceOnUse"
+                                gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)">
+                                <stop offset=".067" stop-color="#9168C0" />
+                                <stop offset=".343" stop-color="#5684D1" />
+                                <stop offset=".672" stop-color="#1BA1E3" />
+                            </radialGradient>
+                        </defs>
+                    </svg>
+                </div> -->
+
+                <!-- <div class="powered-by">Powered by Gemini</div> -->
+
+                <div class="recommendation-container">
+                    <div class="row" id="recommendation-cards"></div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        <div class="chat-container rounded p-3" style="height: 70vh; overflow-y: auto;">
+            <!-- Chat messages will go here -->
+        </div>
+    </div>
+
+
+
+    <div class="typing-container">
+        <div class="input-group">
+            <textarea id="chat-input" class="form-control" rows="2" placeholder="Message Leo" required></textarea>
+            <span id="send-btn" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3 20v-6l8-2l-8-2V4l19 8z" />
+                </svg>
+            </span>
+        </div>
+        <p class="text-center text-muted mt-4" style="font-size: 0.8em;">
+            Leo may display inaccurate info, including about people, so double-check its responses.
+        </p>
+    </div>
+
+    <script type="module" src="mainModule.js"></script>
+    <script type="module" src="script.js"></script>
+    <script src="loader.js"></script>
+    <script src="loading.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+
+
+    </script>
+</body>
+
+</html>

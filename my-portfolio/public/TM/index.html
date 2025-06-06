@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teachable Machine Image Model</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Your custom CSS files -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/main.css">
+
+
+    <!-- Bootstrap Icons CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <style>
+        .section1 h1 {
+            font-size: 3vw;
+            /* Adjust the font size as needed */
+        }
+
+        .section2 h1 {
+            font-size: 2vw;
+            /* Adjust the font size as needed */
+        }
+
+        #webcam-container {
+            margin: 20px 0;
+            /* Adjust margin as needed */
+        }
+    </style>
+</head>
+
+<body data-scroll-container>
+    <div data-scroll-section>
+        <!-- Section 1 -->
+        <section class="section section1" id="bottom" data-scroll data-scroll-speed="1">
+            <div class="content">
+                <div class="text">
+                    <h1 class="hidden font-weight-bold">Teachable Machine Image Model</h1>
+
+                    <!-- Description -->
+                    <p class="description pt-5">
+                        <b class="subheader">Train a computer to recognize your own images.</b> <br>
+                        A fast, easy way to create machine learning models for your sites, apps, and more – no expertise
+                        or coding required.
+                    </p>
+
+                    <!-- Button aligned to the left -->
+                    <a href="#section2" class="scroll-down">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="init()">Start</button>
+                    </a>
+
+                </div>
+
+                <div class="image pl-5 pb-5 mb-5">
+                    <img src="keigo-takami-gif-11.gif" alt="Hawks">
+                </div>
+            </div>
+
+
+
+        </section>
+
+
+
+
+        <!-- Section 2 -->
+        <section class="section section2" id="section2" data-scroll data-scroll-speed="2">
+            <!-- <h1 id="section2-heading" class="fw-bold"><b>Bruh I don't know what to add here!🤬</b></h1> -->
+            <div id="webcam-container"></div>
+            <div id="label-container"></div>
+            <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+            <script>
+                // More API functions here:
+                // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
+                // the link to your model provided by Teachable Machine export panel
+                const URL = "https://teachablemachine.withgoogle.com/models/TGEeYKQqn/";
+
+                let model, webcam, labelContainer, maxPredictions;
+
+                // Load the image model and setup the webcam
+                async function init() {
+                    const modelURL = URL + "model.json";
+                    const metadataURL = URL + "metadata.json";
+
+                    // load the model and metadata
+                    model = await tmImage.load(modelURL, metadataURL);
+                    maxPredictions = model.getTotalClasses();
+
+                    // Convenience function to setup a webcam
+                    const flip = true; // whether to flip the webcam
+                    webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
+                    await webcam.setup(); // request access to the webcam
+                    await webcam.play();
+                    window.requestAnimationFrame(loop);
+
+                    // append elements to the DOM
+                    document.getElementById("webcam-container").appendChild(webcam.canvas);
+                    labelContainer = document.getElementById("label-container");
+                    for (let i = 0; i < maxPredictions; i++) { // and class labels
+                        labelContainer.appendChild(document.createElement("div"));
+                    }
+                }
+
+                async function loop() {
+                    webcam.update(); // update the webcam frame
+                    await predict();
+                    window.requestAnimationFrame(loop);
+                }
+
+                async function predict() {
+                    // run the webcam image through the image model
+                    const prediction = await model.predict(webcam.canvas);
+                    for (let i = 0; i < maxPredictions; i++) {
+                        const percentage = (prediction[i].probability * 100).toFixed(2) + "%";
+                        const classPrediction = prediction[i].className + ": " + percentage;
+                        labelContainer.childNodes[i].innerHTML = classPrediction;
+                    }
+                }
+
+            </script>
+
+        </section>
+    </div>
+
+    <script src="textEffect.js"></script>
+
+</body>
+
+</html>

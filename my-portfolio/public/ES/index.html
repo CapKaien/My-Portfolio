@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Republic Act No. 7166 - Election Law</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <!-- Scroll to Top Button -->
+    <button onclick="topFunction()" id="scrollTopButton">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div id="questionContainer">
+            <h4 id="questionText"></h4>
+            <div class="d-flex justify-content-center gap-2 w-100">
+              <button
+                id="yesButton"
+                onclick="handleAnswer('yes')"
+                class="btn btn-success"
+              >
+                Yes
+              </button>
+              <button
+                id="noButton"
+                onclick="handleAnswer('no')"
+                class="btn btn-danger"
+              >
+                No
+              </button>
+              <button
+                id="backHomeButton"
+                onclick="goBackToHome()"
+                class="btn btn-primary d-none"
+                data-bs-dismiss="modal"
+              >
+                Back to Home
+              </button>
+              <button
+                id="resetButton"
+                onclick="resetSection()"
+                class="btn btn-warning d-none"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero text-white p-5 text-center">
+      <div class="container">
+        <div
+          class="row align-items-center flex-md-row flex-column-reverse g-3 text-start"
+        >
+          <!-- Text Column -->
+          <div class="col-md-6">
+            <h1 class="display-4 fw-bold">RA 7166 Expert System</h1>
+            <p class="lead">
+              Providing legal insights on electoral reforms for synchronized
+              national and local elections.
+            </p>
+            <a href="ra7166.html" class="btn btn-light">Check it out</a>
+          </div>
+
+          <!-- Image Column -->
+          <div class="col-md-6">
+            <img
+              src="banner4.jpg"
+              alt="Legal Insights"
+              class="img-fluid rounded"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <div id="sectionNumbers" class="container py-5 px-4">
+      <div class="row">
+        <div class="col-md-6 d-flex flex-column gap-3">
+          <div
+            class="card p-3"
+            onclick="startSection5Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>Section 5. Election and Campaign Period</h4>
+              <ul>
+                <li>Campaigning outside of the official campaign period</li>
+                <li>Distributing campaign materials in prohibited zones</li>
+                <li>Engaging in premature campaigning activities</li>
+                <li>
+                  Failure to adhere to official guidelines for rallies and
+                  events
+                </li>
+                <li>Using government resources for campaign activities</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection6Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>
+                Section 6. Nomination and Selection of Official Candidates
+              </h4>
+              <ul>
+                <li>Filing nomination papers with false information</li>
+                <li>
+                  Nomination of ineligible candidates by political parties
+                </li>
+                <li>Failure to submit required documents by the deadline</li>
+                <li>Offering bribes or incentives for nomination support</li>
+                <li>Substituting candidates beyond the allowed period</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection9Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>Section 9. Registration of Voters</h4>
+              <ul>
+                <li>Allowing ineligible individuals to register</li>
+                <li>Failure to maintain updated voter lists</li>
+                <li>
+                  Registering voters outside of official registration periods
+                </li>
+                <li>Denying registration without valid cause</li>
+                <li>Manipulating voter records or lists</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection13Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>
+                Section 13. Authorized Expenses of Candidates and Political
+                Parties
+              </h4>
+              <ul>
+                <li>Allowing ineligible individuals to register</li>
+                <li>Failure to maintain updated voter lists</li>
+                <li>
+                  Registering voters outside of official registration periods
+                </li>
+                <li>Denying registration without valid cause</li>
+                <li>Manipulating voter records or lists</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection14Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>
+                Section 14. Statement of Contributions and Expenditures: Effect
+                of Failure to File Statement
+              </h4>
+              <ul>
+                <li>Failure to Submit SOCE Within 30 Days</li>
+                <li>Non-compliance After Previous Violations</li>
+                <li>Elected Official Assumes Office Without Filing SOCE</li>
+                <li>Intentional Misreporting or Inaccurate Submission</li>
+                <li>Interference in the Conduct of Elections</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex flex-column gap-3">
+          <div
+            class="card p-3"
+            onclick="startSection24Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>
+                Section 24. Signature of Chairman at the Back of Every Ballot
+              </h4>
+              <ul>
+                <li>Failing to sign the back of ballots before distribution</li>
+                <li>Using pre-signed ballots in voting precincts</li>
+                <li>Allowing unsigned ballots to be cast in ballot boxes</li>
+                <li>Delegating ballot signing to unauthorized personnel</li>
+                <li>Failure to check ballots for proper authorization</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection25Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>Section 25. Manner of Counting Votes.</h4>
+              <ul>
+                <li>Obstructed View for Watchers or the Public</li>
+                <li>Touching Election Documents by Unauthorized Persons</li>
+                <li>Table Not Cleared of Unnecessary Writing Paraphernalia</li>
+                <li>
+                  Chairman, Poll Clerk, or Third Member Not in Their Proper
+                  Positions
+                </li>
+                <li>
+                  Failing to Simultaneously Accomplish the Election Return and
+                  Tally Board
+                </li>
+                <li>
+                  Allowing Unauthorized Persons to Interfere with Counting
+                </li>
+                <li>Violation of Physical Proximity Rules</li>
+                <li>Disregard of Proper Procedures During Counting</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection31Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>
+                Section 31. Per Diems of Election Inspectors and Other
+                Officials.
+              </h4>
+              <ul>
+                <li>Delayed Payments Without Justifiable Reason</li>
+                <li>Failure to Pay the Correct Amount</li>
+                <li>Non-payment Despite Available Funds</li>
+                <li>Indirect Responsibility for Payment Delays</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection32Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>Section 32. Who May Bear Firearms</h4>
+              <ul>
+                <li>Carrying Firearms Without COMELEC Authorization</li>
+                <li>Law Enforcement Officer Not in Full Uniform</li>
+                <li>
+                  Law Enforcement Officer Off Duty or Outside Designated Area
+                </li>
+                <li>
+                  Unauthorized Person Using a Public Vehicle to Transport
+                  Firearms
+                </li>
+                <li>Firearm Licenses Issued During the Election Period</li>
+                <li>Failure to Obtain Written Authorization from COMELEC</li>
+              </ul>
+            </div>
+          </div>
+
+          <div
+            class="card p-3"
+            onclick="startSection33Questions()"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+            <div class="card-body">
+              <h4>Section 33. Security Personnel and Bodyguards</h4>
+              <ul>
+                <li>Unauthorized Use of Security Personnel or Bodyguards</li>
+                <li>Failure to Apply for COMELEC Authorization</li>
+                <li>Non-compliance with Uniform Requirement</li>
+                <li>Security Threat No Longer Exists</li>
+                <li>Unauthorized Law Enforcement Officers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="section5.js"></script>
+    <script src="section6.js"></script>
+    <script src="section9.js"></script>
+    <script src="section13.js"></script>
+    <script src="section14.js"></script>
+    <script src="section24.js"></script>
+    <script src="section25.js"></script>
+    <script src="section31.js"></script>
+    <script src="section32.js"></script>
+    <script src="section33.js"></script>
+    <script src="script.js"></script>
+    <script>
+      let mybutton = document.getElementById("scrollTopButton");
+
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        if (
+          document.body.scrollTop > 1000 ||
+          document.documentElement.scrollTop > 1000
+        ) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+
+      function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+      }
+    </script>
+  </body>
+</html>

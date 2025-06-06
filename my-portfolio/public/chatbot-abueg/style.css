@@ -1,0 +1,209 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('13 Pro - 5.svg') no-repeat center center fixed; 
+     background-size: cover;  /* Ensure the SVG scales and covers the entire background */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Set height to fill the entire viewport */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    color: white; /* Default text color */
+}
+
+/* Ensure the video covers the background*/
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: -1; 
+    object-fit: cover; 
+    opacity: 0.7; 
+} 
+
+
+
+.chat-container {
+    border-radius: 1.5vw;
+    padding: 2vw;
+    max-width: 70vw; /* Set width for responsiveness */
+    margin: 0 auto;
+}
+
+.typing-container {
+    position: fixed; /* Fix position at the bottom */
+    bottom: 0; /* Align to the bottom of the viewport */
+    left: 50%; /* Align to the center horizontally */
+    transform: translateX(-50%); /* Center it */
+    width: 100vw; /* Set width to 100% of the viewport */
+    max-width: 70vw; /* Match chat container's max width */
+    padding: 0.5vh 1.5vh; /* Reduced padding for height reduction */
+    height: 60px; /* Set a specific height if needed */
+    background-color: #3a3b3b; /* Background color to match the theme */
+    z-index: 1000; /* Ensure it's above other elements */
+    border-radius: 5vw; /* Increase value for a more oval shape */
+    margin-bottom: 5vh; /* Space below the typing container */
+}
+
+
+#chat-input {
+    background-color: transparent; /* Optional: change background color for visibility */
+    color: white; /* Change the text color to white */
+    border: none; /* Remove border */
+    flex-grow: 1; /* Allow input to grow in available space */
+    padding: 1vh; /* Add padding for responsiveness */
+    border-radius: 5vw; /* Oval shape */
+    height: 3vh; /* Adjust height to match the design */
+    display: flex;
+    align-items: center; /* Align text vertically */
+    outline: none; /* Remove focus outline */
+    resize: none; /* Prevent resizing */
+    overflow-y: scroll; /* Allow scrolling */
+    margin-top: 5px;
+   
+}
+
+
+
+#chat-input::placeholder {
+    color: #a2a2a2 !important;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+#chat-input::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for Firefox */
+#chat-input {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+
+
+
+.chat-content {
+    display: flex;
+    align-items: flex-start; /* Align the icon and text at the start */
+    margin-bottom: 5vh; /* Space between bubbles */
+    position: relative; /* Required for absolute positioning of icons */
+}
+
+.chat-content.user {
+    justify-content: flex-end; /* User messages on the right */
+}
+
+.chat-content.ai {
+    justify-content: flex-start; /* AI messages on the left */
+}
+
+.user-text,
+.ai-text {
+    display: flex;
+    align-items: center;
+    background-color: #222222; /* Bubble background color */
+    border-radius: 15px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the bubble */
+    max-width: 40vw; /* Max width for responsiveness */
+    margin-left: 10px; /* Space between icon and bubble for user */
+    margin-right: 10px; /* Space between icon and bubble for AI */
+    color: #e0e0e0; /* Icon color */
+}
+
+.ai-text {
+    margin-left: 10px; /* Add space between the bubble and icon for AI */
+}
+
+.user-icon {
+    margin-right: 10px; /* Space between the icon and text for user */
+}
+
+.ai-icon {
+    margin-left: 10px; /* Space between the icon and text for AI */
+}
+
+/* Positioning the icons */
+.user-icon svg,
+.ai-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    color: #e0e0e0; /* Icon color */
+    position: relative; /* Required for positioning */
+    margin-top: -15px; /* Adjust this value to align the icon vertically */
+}
+
+/* Text inside the bubble */
+.ai-text p,
+.user-text p {
+    white-space: pre-wrap; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    margin: 0; 
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .chat-container {
+        max-width: 85vw; /* Adjust for tablets */
+    }
+
+    .typing-container {
+        max-width: 85vw; /* Match chat container's max width */
+        margin-bottom: 4vh; /* Adjust margin */
+    }
+
+    button svg {
+        width: 4vw; /* Increase icon size on smaller screens */
+        height: 4vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-container {
+        max-width: 90vw; /* Adjust for mobile */
+    }
+
+    .typing-container {
+        max-width: 90vw; /* Match chat container's max width */
+        padding: 2vh; /* Increase padding for easier input */
+    }
+
+    button svg {
+        width: 5vw; /* Further increase icon size for mobile */
+        height: 5vw;
+    }
+
+    #chat-input {
+        padding: 2vh; /* Increase padding for touch screens */
+        height: 8vh; /* Increase input height for mobile */
+    }
+}
+
+.chat-inner-body {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space between items */
+    height: 100%; /* Ensure it takes full height */
+    position: relative; /* For absolute positioning of the button */
+}
+
+.ai .copy {
+    align-self: flex-end; /* Align the copy button to the end of the flex container */
+    margin-top: 1vh; /* Push the button to the bottom */
+    margin-right: .5vw;
+}
+
+
+.user .copy {
+    align-self: flex-start; /* Align the copy button to the start of the flex container */
+    margin-top: 1vh; /* Push the button to the bottom */
+    margin-left: .5vw;
+}
+
+
+
+
+
+
+
