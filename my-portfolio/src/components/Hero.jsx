@@ -103,15 +103,21 @@ export default function Hero() {
             {/* FRONTEND with pink cursor */}
             <div className="text-[2rem] xs:text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl relative flex items-center justify-center">
               <span style={{ color: '#fff' }}>&amp;</span>
-              <span style={{ color: '#2FCA55', position: "relative", display: "inline-block" }}>
-                {" "}
+              <span
+                style={{
+                  color: '#2FCA55',
+                  position: "relative",
+                  display: "inline-block",
+                  marginLeft: "0.3em" // Add space here
+                }}
+              >
                 FRONTEND
                 {/* Pink animated cursor */}
                 <span
                   className="absolute"
                   style={{
-                    left: "-9.5rem", // Move to the left
-                    bottom: "1.5rem" // Move down
+                    left: "-9.5rem",
+                    bottom: "1.5rem"
                   }}
                 >
                   <AnimatedCursor color="#FF5EC5" />
