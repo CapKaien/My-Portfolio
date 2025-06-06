@@ -39,7 +39,6 @@ export default function Works({ showAll = false }) {
             {/* Wrapper for line and heading */}
             <div
                 className="w-full max-w-6xl z-30"
-                // Removed sticky styles
             >
                 {/* 1px line above the heading */}
                 <div
@@ -48,15 +47,27 @@ export default function Works({ showAll = false }) {
                         marginBottom: "2rem",
                     }}
                 />
-                <h2
-                    className="text-2xl sm:text-3xl font-bold w-full text-[#c7c7c7]"
-                    style={{
-                        paddingTop: "1.5rem",
-                        paddingBottom: "1.5rem",
-                    }}
-                >
-                    {showAll ? "All Works" : "Latest work"}
-                </h2>
+                <div className="flex items-center justify-between w-full">
+                    <h2
+                        className="text-2xl sm:text-3xl font-bold text-[#c7c7c7]"
+                        style={{
+                            paddingTop: "1.5rem",
+                            paddingBottom: "1.5rem",
+                        }}
+                    >
+                        {showAll ? "All Works" : "Latest work"}
+                    </h2>
+                    {!showAll && (
+                        <a
+                            href="/all-works"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#A374FF] text-base font-semibold hover:underline transition"
+                        >
+                            See all my works &rarr;
+                        </a>
+                    )}
+                </div>
             </div>
 
             {visibleWorks.map((work, idx) => {
@@ -140,19 +151,6 @@ export default function Works({ showAll = false }) {
                     </div>
                 );
             })}
-
-            {!showAll && (
-                <div className="w-full max-w-6xl flex justify-end">
-                    <a
-                        href="/all-works"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#A374FF] text-base font-semibold hover:underline transition"
-                    >
-                        See all my works &rarr;
-                    </a>
-                </div>
-            )}
         </section>
     );
 }
