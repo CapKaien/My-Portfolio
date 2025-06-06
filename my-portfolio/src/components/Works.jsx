@@ -140,6 +140,7 @@ export default function Works({ showAll = false }) {
                     <div
                         key={work.title}
                         className="w-full max-w-6xl mb-8 relative"
+                        style={{ overflow: "visible" }}
                     >
                         {work.link ? (
                             <a href={work.link} target="_blank" rel="noopener noreferrer" style={{ display: "block" }}>
