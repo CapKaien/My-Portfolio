@@ -1,34 +1,12 @@
 import { useState, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaBriefcase } from "react-icons/fa";
 import works from "../assets/works";
 
 export default function Works({ showAll = false }) {
-    const [hoveredIdx, setHoveredIdx] = useState(null);
-    const [showPopoverIdx, setShowPopoverIdx] = useState(null);
-    const [popoverPos, setPopoverPos] = useState({ x: 0, y: 0 });
-    const hoverTimeout = useRef(null);
     const visibleWorks = showAll ? works : works.slice(0, 3);
 
-    const handleMouseEnter = (idx, e) => {
-        setHoveredIdx(idx);
-        const { clientX, clientY } = e;
-        setPopoverPos({ x: clientX, y: clientY });
-        hoverTimeout.current = setTimeout(() => {
-            setShowPopoverIdx(idx);
-        }, 2000); // 2 seconds
-    };
-
-    const handleMouseMove = (e) => {
-        const { clientX, clientY } = e;
-        setPopoverPos({ x: clientX, y: clientY });
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredIdx(null);
-        clearTimeout(hoverTimeout.current);
-        setShowPopoverIdx(null);
-    };
 
     return (
         <section
@@ -36,17 +14,15 @@ export default function Works({ showAll = false }) {
             className="min-h-[60vh] py-20 px-2 sm:px-4 flex flex-col items-center justify-center bg-transparent"
             style={{ overflow: "visible" }}
         >
-            {/* Wrapper for line and heading */}
-            <div
-                className="w-full max-w-6xl z-30"
-            >
-                {/* 1px line above the heading */}
-                <div
-                    style={{
-                        borderTop: "1px solid #2c2b2b",
-                        marginBottom: "2rem",
-                    }}
-                />
+            {/* Divider with icon */}
+            <div className="relative w-full max-w-[1600px] mx-auto mt-4 mb-8">
+                <hr className="border-t border-[#2c2b2b]" />
+                <span className="absolute right-8 -top-7 bg-[#F8F6ED] rounded-full w-14 h-14 flex items-center justify-center shadow-md border border-[#F1C069]">
+                    <FaBriefcase size={28} className="text-[#232323]" />
+                </span>
+            </div>
+            {/* Heading and link */}
+            <div className="w-full max-w-6xl z-30">
                 <div className="flex items-center justify-between w-full">
                     <h2
                         className="text-2xl sm:text-3xl font-bold text-[#c7c7c7]"

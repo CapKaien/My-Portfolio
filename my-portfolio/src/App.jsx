@@ -11,6 +11,7 @@ import Hero from './components/Hero';
 import Details from './components/Details';
 import Works from './components/Works';
 import AllWorks from "./components/AllWorks";
+import Skills from "./components/Skills";
 
 export default function App() {
   const scrollRef = useRef(null);
@@ -45,6 +46,7 @@ export default function App() {
                 <Hero />
                 <Details />
                 <Works />
+                <Skills />
               </>
             }
           />

@@ -1,10 +1,17 @@
-import { FaTwitter, FaInstagram, FaGithub, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaTwitter, FaInstagram, FaGithub, FaFacebook, FaLinkedin, FaRegIdBadge } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { motion } from "framer-motion";
 
 export default function Details() {
   return (
-    <div className="px-6 py-12 text-white border-t border-neutral-800">
+    <div className="px-6 py-12">
+      {/* Divider with id badge icon above the heading */}
+      <div className="relative w-full max-w-[1600px] mx-auto mb-10">
+        <hr className="border-t border-[#2c2b2b]" />
+        <span className="absolute right-8 -top-7 bg-[#F8F6ED] rounded-full w-14 h-14 flex items-center justify-center shadow-md border border-[#FFB545]">
+          <FaRegIdBadge size={28} className="text-[#1e1e1e]" />
+        </span>
+      </div>
       <div className="flex flex-col md:flex-row md:justify-between items-center gap-6 text-xl">
         {/* First column: plain text */}
         <div className="text-xs sm:text-sm text-neutral-400 text-left font-normal normal-case min-w-[120px]">
@@ -89,11 +96,8 @@ export default function Details() {
             viewport={{ once: true, amount: 0.7 }}
           >
             Shaping the future innovating with purpose
-            
           </motion.p>
-          
         </div>
-        
         {/* Right: Small text */}
         <motion.div
           className="flex-1 text-left md:max-w-xs mt-6 md:mt-0"
@@ -107,10 +111,7 @@ export default function Details() {
             skills sets me apart in the tech industry.
           </p>
         </motion.div>
-        
       </div>
-      
     </div>
-    
   );
 }
