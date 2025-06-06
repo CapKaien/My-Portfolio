@@ -1,0 +1,146 @@
+# Portfolio Documentation
+
+## Project Overview
+
+This is a personal portfolio website built with **React**. It showcases your latest works, skills, and provides contact information. The project uses modern React features, Framer Motion for animations, Lucide icons, and Tailwind CSS for styling. The site is responsive and includes a fixed navigation bar, animated cards, and downloadable resume.
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/your-username/your-portfolio.git
+cd your-portfolio
+```
+
+### 2. Install Dependencies
+
+Install all required npm packages:
+
+```sh
+npm install
+```
+
+#### Main npm Packages Used
+
+- **react**  
+- **react-dom**
+- **react-router-dom**  
+- **framer-motion**  
+- **lucide-react**  
+- **tailwindcss**  
+- **autoprefixer**  
+- **postcss**  
+
+If you use `create-react-app`, some of these may already be included.
+
+#### Example of all installs (if you set up manually):
+
+```sh
+npm install react react-dom react-router-dom framer-motion lucide-react tailwindcss autoprefixer postcss
+```
+
+### 3. Tailwind CSS Setup
+
+If not already set up, initialize Tailwind:
+
+```sh
+npx tailwindcss init -p
+```
+
+Add the following to your `tailwind.config.js`:
+
+```js
+module.exports = {
+  content: [
+    "./src/**/*.{js,jsx,ts,tsx}",
+    "./public/index.html",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+Add Tailwind to your `src/index.css`:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+---
+
+## Project Structure
+
+```
+my-portfolio/
+├── public/
+│   └── assets/
+│       └── CV_Abueg_2025.pdf
+├── src/
+│   ├── assets/
+│   │   └── works.js
+│   ├── components/
+│   │   ├── Navbar.jsx
+│   │   ├── Works.jsx
+│   │   └── ...other components
+│   ├── App.jsx
+│   ├── index.js
+│   └── index.css
+├── tailwind.config.js
+├── package.json
+└── README.md
+```
+
+---
+
+## Main Features
+
+- **Responsive Navbar:** Fixed at the top, with mobile hamburger menu.
+- **Animated Work Cards:** Uses Framer Motion for smooth entrance and hover effects.
+- **Works Section:** Displays latest or all works, with tech stack and details.
+- **Downloadable Resume:** Available in both desktop and mobile nav.
+- **Contact Section:** Easy way for visitors to reach out.
+- **Modern Styling:** Tailwind CSS for utility-first, responsive design.
+- **Lucide Icons:** For modern, lightweight SVG icons.
+
+---
+
+## Scripts
+
+- `npm start` — Runs the app in development mode.
+- `npm run build` — Builds the app for production.
+- `npm run lint` — (If ESLint is set up) Lints your code.
+
+---
+
+## Customization
+
+- **Add/Edit Works:**  
+  Edit `src/assets/works.js` to add or update your projects.
+- **Change Resume:**  
+  Replace `public/assets/CV_Abueg_2025.pdf` with your latest resume.
+- **Update Contact Info:**  
+  Edit the contact section in the relevant component.
+
+---
+
+## Deployment
+
+You can deploy this portfolio to any static hosting service, such as **Vercel**, **Netlify**, or **GitHub Pages**.
+
+---
+
+## Credits
+
+- [React](https://react.dev/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Lucide Icons](https://lucide.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+---
