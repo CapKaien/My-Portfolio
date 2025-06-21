@@ -6,5 +6,7 @@ module.exports = {
       },
     },
   },
-  // other configs if any...
+  plugins: [
+    require('tailwindcss-filters'),
+  ],
 };

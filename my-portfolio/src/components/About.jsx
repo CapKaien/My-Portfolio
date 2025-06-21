@@ -5,29 +5,65 @@ import "locomotive-scroll/dist/locomotive-scroll.css";
 
 export default function About({ scrollRef }) {
   // Locomotive Scroll for About page
-  useEffect(() => {
-    let scroll;
-    if (scrollRef && scrollRef.current) {
-      scroll = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-        lerp: 0.08,
-      });
-    }
-    return () => {
-      if (scroll) scroll.destroy();
-    };
-  }, [scrollRef]);
+
 
   return (
-    <main className="w-full min-h-screen flex bg-[#0E0E0E] text-white px-6 md:px-20 py-12 box-border">
-      {/* Left column */}
-      <aside className="w-full max-w-lg flex flex-col justify-start px-12 pt-24 pb-10 z-10 bg-transparent">
+    <main className="w-full min-h-screen flex flex-col md:flex-row bg-[#0E0E0E] text-white px-3 sm:px-6 md:px-20 py-8 md:py-12 box-border">
+      {/* Mobile Header: visible only on mobile */}
+      <div className="flex flex-col lg:hidden w-full px-2 sm:px-6 pt-6 pb-4">
+        <h1 className="text-4xl sm:text-5xl font-extrabold mb-2 text-white">
+          Ranniel Abueg
+        </h1>
+        <h2 className="text-xl sm:text-2xl font-semibold text-neutral-300 mb-3">
+          Front End Designer/Developer
+        </h2>
+        <p className="text-base text-neutral-400 mb-6">
+          I build responsive, accessible, and user-friendly web applications
+          using modern technologies like React and Tailwind CSS.
+        </p>
+        {/* Socials */}
+        <div className="flex gap-4 mt-2 mb-2 text-[#c7c7c7]">
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaFacebook className="text-2xl" />
+          </a>
+          <a
+            href="https://github.com/CapKaien"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaGithub className="text-2xl" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ranniel-abueg-a082a636a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaLinkedin className="text-2xl" />
+          </a>
+          <a
+            href="https://www.instagram.com/ran_abueg/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaInstagram className="text-2xl" />
+          </a>
+        </div>
+      </div>
+      {/* Left column: only name, title, socials */}
+      <aside className="hidden lg:flex w-full lg:max-w-lg flex-col justify-start px-4 sm:px-8 lg:px-12 pt-12 lg:pt-24 pb-8 lg:pb-10 z-10 bg-transparent">
         <div>
-          <h1 className="text-5xl font-extrabold mb-2 text-white">
+          <h1 className="text-4xl sm:text-5xl font-extrabold mb-2 text-white">
             Ranniel Abueg
           </h1>
-          <h2 className="text-2xl font-semibold text-neutral-300 mb-3">
+          <h2 className="text-xl sm:text-2xl font-semibold text-neutral-300 mb-3">
             Front End Designer/Developer
           </h2>
           <p className="text-base text-neutral-400 mb-10">
@@ -36,7 +72,7 @@ export default function About({ scrollRef }) {
           </p>
         </div>
         {/* Socials */}
-        <div className="flex gap-4 mt-8 mb-2 text-[#c7c7c7] px-2">
+        <div className="flex gap-4 mt-8 mb-6 text-[#c7c7c7] px-2">
           <a
             href="https://facebook.com/"
             target="_blank"
@@ -71,11 +107,11 @@ export default function About({ scrollRef }) {
           </a>
         </div>
       </aside>
-      {/* Right column (Locomotive Scroll container) */}
+      {/* Scroll container: always rendered for Locomotive Scroll */}
       <section
         ref={scrollRef}
         data-scroll-container
-        className="flex-1 px-12 py-24"
+        className="flex-1 px-2 sm:px-6 md:px-12 py-8 md:py-24"
         style={{
           minWidth: 0,
           background: "transparent",
@@ -84,10 +120,10 @@ export default function About({ scrollRef }) {
         {/* About Section */}
         <div
           id="about"
-          className="mb-16"
+          className="mb-10 md:mb-16"
           data-scroll-section
         >
-          <p className="text-lg text-neutral-300 leading-relaxed max-w-2xl">
+          <p className="text-base sm:text-lg md:text-lg text-neutral-300 leading-relaxed max-w-2xl">
             I'm a front-end developer passionate about crafting clean,
             responsive, and accessible user interfaces using modern tools like
             React, Vite, and Tailwind CSS. I love building digital experiences
@@ -115,17 +151,16 @@ export default function About({ scrollRef }) {
             layouts, and learning new tech to level up my skills.
           </p>
         </div>
-
         {/* Experience Section */}
         <div
           id="experience"
-          className="mb-16 mt-16 py-8"
+          className="mb-10 md:mb-16 mt-10 md:mt-16 py-8"
           data-scroll-section
         >
           {/* Experience Label with icon and horizontal line */}
           <div className="relative w-full max-w-2xl mx-auto mb-8">
             <hr className="border-t border-[#2c2b2b]" />
-            <span className="absolute right-8 -top-7 bg-[#F8F6ED] rounded-full w-14 h-14 flex items-center justify-center shadow-md border border-[#FFB545]">
+            <span className="absolute right-4 md:right-8 -top-7 bg-[#F8F6ED] rounded-full w-14 h-14 flex items-center justify-center shadow-md border border-[#FFB545]">
               <FaRegIdBadge size={28} className="text-[#1e1e1e]" />
             </span>
           </div>
@@ -154,7 +189,6 @@ export default function About({ scrollRef }) {
             </span>
           </div>
         </div>
-
         {/* Projects Section */}
         <div
           id="projects"
