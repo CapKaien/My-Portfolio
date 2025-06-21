@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import LocomotiveScroll from 'locomotive-scroll';
 import 'locomotive-scroll/dist/locomotive-scroll.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 //components
 import Navbar from './components/Navbar';
@@ -12,47 +12,69 @@ import Details from './components/Details';
 import Works from './components/Works';
 import AllWorks from "./components/AllWorks";
 import Skills from "./components/Skills";
+import About from "./components/About";
 
-export default function App() {
+function AppContent() {
   const scrollRef = useRef(null);
+  const aboutScrollRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: scrollRef.current,
-      smooth: true,
-      lerp: 0.08,
-    });
+    let scroll;
+    if (location.pathname === "/") {
+      scroll = new LocomotiveScroll({
+        el: scrollRef.current,
+        smooth: true,
+        lerp: 0.08,
+      });
+    } else if (location.pathname === "/about") {
+      scroll = new LocomotiveScroll({
+        el: aboutScrollRef.current,
+        smooth: true,
+        lerp: 0.08,
+      });
+    }
     return () => {
-      scroll.destroy();
+      if (scroll) scroll.destroy();
     };
-  }, []);
+  }, [location.pathname]);
+
+
 
   return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <motion.div
+              ref={scrollRef}
+              data-scroll-container
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2 }}
+              className="bg-[#0E0E0E] min-h-screen px-2 sm:px-6 lg:px-16"
+            >
+              <Hero />
+              <Details />
+              <Works />
+              <Skills />
+            </motion.div>
+          }
+        />
+        <Route path="/about" element={<About scrollRef={aboutScrollRef} />} />
+        <Route path="/all-works" element={<AllWorks />} />
+      </Routes>
+    </>
+  );
+}
+
+export default function App() {
+  return (
     <Router>
-      <motion.div
-        ref={scrollRef}
-        data-scroll-container
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-        className="bg-[#0E0E0E] min-h-screen px-2 sm:px-6 lg:px-16"
-      >
-        <Navbar />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <Details />
-                <Works />
-                <Skills />
-              </>
-            }
-          />
-          <Route path="/all-works" element={<AllWorks />} />
-        </Routes>
-      </motion.div>
+      <AppContent />
     </Router>
   );
 }

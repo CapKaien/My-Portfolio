@@ -1,6 +1,6 @@
 import { Mail, ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from "react-router-dom"; // Add this import if using react-router-dom
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function Hamburger({ open }) {
   return (
@@ -26,19 +26,33 @@ function Hamburger({ open }) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleWorkClick = (e) => {
+    e.preventDefault();
+    if (location.pathname !== "/") {
+      navigate("/", { replace: false });
+      // Wait for navigation, then scroll (using a timeout or event)
+      setTimeout(() => {
+        const event = new CustomEvent("scrollToWork");
+        window.dispatchEvent(event);
+      }, 100); // Adjust timeout as needed
+    } else {
+      const event = new CustomEvent("scrollToWork");
+      window.dispatchEvent(event);
+    }
+  };
 
   return (
-    <header className="flex justify-between items-center px-6 py-4 border-b border-neutral-800 text-white">
-      {/* Change this div to a Link */}
+    <header className="flex justify-between items-center px-6 py-4 border-b border-neutral-800 text-white bg-[#0E0E0E]">
       <Link to="/" className="text-lg font-semibold hover:underline">
         RannCreations
       </Link>
       {/* Desktop nav */}
       <div className="hidden sm:flex items-center gap-6 ml-auto">
         <nav className="flex gap-6 text-sm">
-          <a href="#work" className="text-[#c7c7c7] hover:underline hover:text-[#c7c7c7]">Work</a>
-          <a href="#about" className="text-[#c7c7c7] hover:underline hover:text-[#c7c7c7]">About</a>
-          <a href="#contact" className="text-[#c7c7c7] hover:underline hover:text-[#c7c7c7]">Contact</a>
+          <Link to="/about" className="text-[#c7c7c7] hover:underline hover:text-[#c7c7c7]">About</Link>
           <a
             href="/assets/CV_Abueg_2025.pdf"
             download="CV_Abueg_2025.pdf"
@@ -66,7 +80,7 @@ export default function Navbar() {
         {open && (
           <div className="absolute top-16 right-6 bg-[#181818] border border-[#2c2b2b] rounded-xl shadow-lg flex flex-col w-40 z-50">
             <a href="#work" className="px-4 py-2 text-[#c7c7c7] hover:bg-neutral-800">Work</a>
-            <a href="#about" className="px-4 py-2 text-[#c7c7c7] hover:bg-neutral-800">About</a>
+            <Link to="/about" className="px-4 py-2 text-[#c7c7c7] hover:bg-neutral-800">About</Link>
             <a href="#contact" className="px-4 py-2 text-[#c7c7c7] hover:bg-neutral-800">Contact</a>
             <a
               href="/assets/CV_Abueg_2025.pdf"
