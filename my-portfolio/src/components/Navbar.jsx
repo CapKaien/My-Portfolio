@@ -45,7 +45,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="flex justify-between items-center px-6 py-4 border-b border-neutral-800 text-white bg-[#0E0E0E]">
+    <header className="flex justify-between items-center px-6 py-4 border-b border-neutral-800 text-white bg-[#0E0E0E] z-50 relative">
       <Link to="/" className="text-lg font-semibold hover:underline">
         RannCreations
       </Link>
@@ -58,7 +58,7 @@ export default function Navbar() {
             download="CV_Abueg_2025.pdf"
             className="text-[#c7c7c7] hover:underline hover:text-[#c7c7c7]"
           >
-            Resume
+            Resumé
           </a>
         </nav>
         <a

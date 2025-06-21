@@ -1,23 +1,9 @@
-import { useRef, useState, useEffect } from "react";
-import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
-
-const sections = [
-  { id: "about", label: "ABOUT" },
-  { id: "experience", label: "EXPERIENCE" },
-  { id: "projects", label: "PROJECTS" },
-];
+import { useRef, useEffect } from "react";
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaRegIdBadge } from "react-icons/fa";
+import LocomotiveScroll from "locomotive-scroll";
+import "locomotive-scroll/dist/locomotive-scroll.css";
 
 export default function About({ scrollRef }) {
-  const [activeSection, setActiveSection] = useState("about");
-  const rightColRef = useRef(null);
-  const sectionRefs = {
-    about: useRef(null),
-    experience: useRef(null),
-    projects: useRef(null),
-  };
-
   // Locomotive Scroll for About page
   useEffect(() => {
     let scroll;
@@ -33,123 +19,159 @@ export default function About({ scrollRef }) {
     };
   }, [scrollRef]);
 
-  // Scroll spy logic
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = rightColRef.current.scrollTop;
-      let current = "about";
-      for (const sec of sections) {
-        const ref = sectionRefs[sec.id].current;
-        if (ref && ref.offsetTop - 40 <= scrollY) {
-          current = sec.id;
-        }
-      }
-      setActiveSection(current);
-    };
-    const node = rightColRef.current;
-    if (node) node.addEventListener("scroll", handleScroll);
-    return () => node && node.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Scroll to section on nav click
-  const scrollToSection = (id) => {
-    const ref = sectionRefs[id].current;
-    if (ref && rightColRef.current) {
-      rightColRef.current.scrollTo({
-        top: ref.offsetTop - 24,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
-    <main className="w-full min-h-screen flex bg-[#0E0E0E] text-white">
+    <main className="w-full min-h-screen flex bg-[#0E0E0E] text-white px-6 md:px-20 py-12 box-border">
       {/* Left column */}
-      <aside className="w-full max-w-lg flex flex-col justify-start px-12 pt-24 pb-10 h-screen z-10 bg-transparent">
+      <aside className="w-full max-w-lg flex flex-col justify-start px-12 pt-24 pb-10 z-10 bg-transparent">
         <div>
-          <h1 className="text-5xl font-extrabold mb-2 text-white">Brittany Chiang</h1>
-          <h2 className="text-2xl font-semibold text-neutral-300 mb-3">Front End Engineer</h2>
+          <h1 className="text-5xl font-extrabold mb-2 text-white">
+            Ranniel Abueg
+          </h1>
+          <h2 className="text-2xl font-semibold text-neutral-300 mb-3">
+            Front End Designer/Developer
+          </h2>
           <p className="text-base text-neutral-400 mb-10">
-            I build accessible, pixel-perfect digital experiences for the web.
+            I build responsive, accessible, and user-friendly web applications
+            using modern technologies like React and Tailwind CSS.
           </p>
         </div>
-        {/* Section Nav */}
-        <nav className="flex flex-col gap-2 mt-8 mb-10">
-          {sections.map((sec) => (
-            <button
-              key={sec.id}
-              onClick={() => scrollToSection(sec.id)}
-              className={`flex items-center gap-2 text-left px-2 py-1 border-l-2 transition-all
-                ${
-                  activeSection === sec.id
-                    ? "border-[#38BDF8] text-white font-bold"
-                    : "border-transparent text-neutral-400 font-normal"
-                }`}
-              style={{ letterSpacing: "2px" }}
-            >
-              {sec.label}
-            </button>
-          ))}
-        </nav>
         {/* Socials */}
-        <div className="flex gap-4 mt-auto mb-2 text-[#c7c7c7]">
-          <a href="https://github.com/CapKaien" target="_blank" rel="noopener noreferrer">
-            <FaGithub className="text-xl" />
+        <div className="flex gap-4 mt-8 mb-2 text-[#c7c7c7] px-2">
+          <a
+            href="https://facebook.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaFacebook className="text-2xl" />
           </a>
-          <a href="https://www.linkedin.com/in/ranniel-abueg-a082a636a/" target="_blank" rel="noopener noreferrer">
-            <FaLinkedin className="text-xl" />
+          <a
+            href="https://github.com/CapKaien"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaGithub className="text-2xl" />
           </a>
-          <a href="https://www.instagram.com/ran_abueg/" target="_blank" rel="noopener noreferrer">
-            <FaInstagram className="text-xl" />
+          <a
+            href="https://www.linkedin.com/in/ranniel-abueg-a082a636a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaLinkedin className="text-2xl" />
+          </a>
+          <a
+            href="https://www.instagram.com/ran_abueg/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition"
+          >
+            <FaInstagram className="text-2xl" />
           </a>
         </div>
       </aside>
-      {/* Right column (scrollable, fixed to viewport) */}
+      {/* Right column (Locomotive Scroll container) */}
       <section
         ref={scrollRef}
         data-scroll-container
-        className="flex-1 overflow-y-auto px-10 py-24 h-screen"
+        className="flex-1 px-12 py-24"
         style={{
           minWidth: 0,
           background: "transparent",
         }}
       >
         {/* About Section */}
-        <div ref={sectionRefs.about} id="about" className="mb-16">
+        <div
+          id="about"
+          className="mb-16"
+          data-scroll-section
+        >
           <p className="text-lg text-neutral-300 leading-relaxed max-w-2xl">
-            I'm a developer passionate about crafting accessible, pixel-perfect user interfaces that blend thoughtful design with robust engineering. My favorite work lies at the intersection of design and development, creating experiences that not only look great but are meticulously built for performance and usability.
-            <br /><br />
-            Currently, I'm a Senior Front-End Engineer at <span className="font-semibold text-[#38BDF8]">Klaviyo</span>, specializing in accessibility. I contribute to the creation and maintenance of UI components that power Klaviyo’s frontend, ensuring our platform meets web accessibility standards and best practices to deliver an inclusive user experience.
-            <br /><br />
-            In the past, I've had the opportunity to develop software across a variety of settings — from <span className="font-bold text-white">advertising agencies and large corporations to start-ups</span> and small digital product studios. Additionally, I also released a <span className="font-bold text-white">comprehensive video course</span> a few years ago, guiding learners through building a web app with the Spotify API.
-            <br /><br />
-            In my spare time, I’m usually climbing, reading, hanging out with my wife and two cats, or running around Hyrule searching for <span className="font-bold text-white">Korok seeds</span>.
+            I'm a front-end developer passionate about crafting clean,
+            responsive, and accessible user interfaces using modern tools like
+            React, Vite, and Tailwind CSS. I love building digital experiences
+            that are both visually appealing and user-friendly.
+            <br />
+            <br />
+            Recently, I completed my internship at{" "}
+            <span className="font-semibold text-[#38BDF8]">
+              Leentech Network Solutions
+            </span>
+            , where I worked on designing and developing interfaces for a job
+            portal using Tailwind CSS and React. I focused on building
+            components that adapt well across different devices and screen
+            sizes.
+            <br />
+            <br />I also led the development of{" "}
+            <span className="font-bold text-white">ReadSpeak</span>, a
+            speech-based learning platform designed to help elementary students
+            improve their reading and comprehension. Through this project, I
+            deepened my experience in API integration, UI/UX design, and
+            accessibility.
+            <br />
+            <br />
+            In my spare time, I enjoy exploring web animations, refining
+            layouts, and learning new tech to level up my skills.
           </p>
         </div>
+
         {/* Experience Section */}
-        <div ref={sectionRefs.experience} id="experience" className="mb-16">
-          <div className="text-sm text-neutral-400 mb-2">2024 — PRESENT</div>
+        <div
+          id="experience"
+          className="mb-16 mt-16 py-8"
+          data-scroll-section
+        >
+          {/* Experience Label with icon and horizontal line */}
+          <div className="relative w-full max-w-2xl mx-auto mb-8">
+            <hr className="border-t border-[#2c2b2b]" />
+            <span className="absolute right-8 -top-7 bg-[#F8F6ED] rounded-full w-14 h-14 flex items-center justify-center shadow-md border border-[#FFB545]">
+              <FaRegIdBadge size={28} className="text-[#1e1e1e]" />
+            </span>
+          </div>
+          <div className="text-sm text-neutral-400 mb-2">June 2024 — August 2024</div>
           <div className="font-semibold text-lg text-white mb-1">
-            Senior Frontend Engineer, Accessibility · Klaviyo <span className="inline-block align-middle">↗</span>
+            Frontend Developer Intern · Leentech Network Solutions
           </div>
           <div className="text-base text-neutral-300 mb-2">
-            Build and maintain critical components used to construct Klaviyo’s frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility.
+            Designed and developed responsive UI components for a job portal
+            using React and Tailwind CSS. Collaborated with designers and
+            developers to implement clean, accessible layouts, and contributed
+            to improving the overall user experience of the platform.
           </div>
           <div className="flex gap-2 flex-wrap mt-2">
-            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">JavaScript</span>
-            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">TypeScript</span>
-            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">React</span>
-            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">Storybook</span>
+            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">
+              JavaScript
+            </span>
+            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">
+              React
+            </span>
+            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">
+              Tailwind CSS
+            </span>
+            <span className="bg-[#1e293b] text-[#38BDF8] px-3 py-1 rounded-full text-xs font-semibold">
+              Figma
+            </span>
           </div>
         </div>
+
         {/* Projects Section */}
-        <div ref={sectionRefs.projects} id="projects" className="mb-16">
-          <div className="font-semibold text-lg text-white mb-2">Projects</div>
-          <ul className="list-disc ml-6 text-neutral-300">
-            <li>Spotify API Video Course</li>
-            <li>Accessible UI Component Library</li>
-            <li>Personal Portfolio Website</li>
-          </ul>
+        <div
+          id="projects"
+          className="mb-16"
+          data-scroll-section
+        >
+          <p className="text-base text-neutral-400 leading-relaxed max-w-2xl">
+            Loosely designed in{" "}
+            <span className="font-semibold text-white">Figma</span> and coded in{" "}
+            <span className="font-semibold text-white">Visual Studio Code</span> by
+            yours truly. Built with{" "}
+            <span className="font-semibold text-white">ReactJS+Vite</span> and{" "}
+            <span className="font-semibold text-white">Tailwind CSS</span>, deployed
+            with <span className="font-semibold text-white">Vercel</span>. All text
+            is set in the{" "}
+            <span className="font-semibold text-white">Inter</span> typeface.
+          </p>
         </div>
       </section>
     </main>
